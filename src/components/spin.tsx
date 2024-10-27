@@ -76,7 +76,13 @@ export default function RandomTeamGenerator() {
         if (!validateInputs()) return
 
         const shuffled = [...names].sort(() => 0.5 - Math.random())
-        const newTeams = teams.map((team) => ({ ...team, members: [] }))
+        const newTeams: { name: string; members: string[] }[] = teams.map(
+            (team) => ({
+                ...team,
+                members: [] as string[],
+            })
+        )
+
         let teamIndex = 0
 
         shuffled.forEach((name) => {
