@@ -1,12 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { AlertCircle, RefreshCw, Users, Edit2, Moon, Sun } from "lucide-react"
+import {
+    AlertCircle,
+    RefreshCw,
+    Users,
+    Edit2,
+    Moon,
+    Sun,
+    Plus,
+} from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
     Tooltip,
@@ -27,6 +35,7 @@ export default function RandomTeamGenerator() {
     const [error, setError] = useState("")
     const { theme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
+    const nameInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         setMounted(true)
@@ -40,10 +49,17 @@ export default function RandomTeamGenerator() {
         setTeams(newTeams)
     }, [numTeams])
 
-    const handleAddName = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
-            setNames([...names, e.currentTarget.value.trim()])
-            e.currentTarget.value = ""
+    const handleAddName = () => {
+        if (nameInputRef.current && nameInputRef.current.value.trim() !== "") {
+            setNames([...names, nameInputRef.current.value.trim()])
+            nameInputRef.current.value = ""
+        }
+    }
+
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            handleAddName()
         }
     }
 
@@ -164,12 +180,22 @@ export default function RandomTeamGenerator() {
                             >
                                 Enter Name
                             </Label>
-                            <Input
-                                id="names"
-                                placeholder="Type a name and press Enter"
-                                onKeyPress={handleAddName}
-                                className="text-lg"
-                            />
+                            <div className="flex">
+                                <Input
+                                    id="names"
+                                    ref={nameInputRef}
+                                    placeholder="Type a name"
+                                    onKeyPress={handleKeyPress}
+                                    className="text-lg flex-grow"
+                                />
+                                <Button
+                                    onClick={handleAddName}
+                                    className="ml-2"
+                                >
+                                    <Plus className="h-4 w-4" />
+                                    <span className="sr-only">Add name</span>
+                                </Button>
+                            </div>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             <AnimatePresence>
