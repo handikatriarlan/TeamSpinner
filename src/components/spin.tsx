@@ -132,6 +132,10 @@ export default function RandomTeamGenerator() {
         })
     }
 
+    const toggleTheme = () => {
+        setTheme(theme === "dark" ? "light" : "dark")
+    }
+
     if (!mounted) {
         return null
     }
@@ -160,9 +164,7 @@ export default function RandomTeamGenerator() {
                 <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                        setTheme(theme === "dark" ? "light" : "dark")
-                    }
+                    onClick={toggleTheme}
                     className="rounded-full"
                 >
                     <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -334,7 +336,7 @@ export default function RandomTeamGenerator() {
                                 </TooltipProvider>
                             </CardHeader>
                             <CardContent className="p-4">
-                                <ul className="list-none list-inside space-y-1">
+                                <ul className="list-disc list-inside space-y-1">
                                     {team.members.map((member, memberIndex) => (
                                         <motion.li
                                             key={memberIndex}
