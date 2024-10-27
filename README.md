@@ -1,6 +1,6 @@
 # TeamSpinner
 
-![TeamSpinner Screenshot]()
+![TeamSpinner Screenshot](https://ucarecdn.com/80484df7-b46a-4370-aab3-3ed65f854840/TeamSpinner.png)
 
 TeamSpinner is an intuitive and engaging random team generator built with Next.js, React, and Tailwind CSS. It allows users to quickly create balanced teams for any event or activity by simply entering names, specifying the number of teams, and setting the maximum number of participants per team.
 
