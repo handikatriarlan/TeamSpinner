@@ -336,7 +336,7 @@ export default function RandomTeamGenerator() {
                                 </TooltipProvider>
                             </CardHeader>
                             <CardContent className="p-4">
-                                <ul className="list-disc list-inside space-y-1">
+                                <ul className="list-none list-inside space-y-1">
                                     {team.members.map((member, memberIndex) => (
                                         <motion.li
                                             key={memberIndex}
